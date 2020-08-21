@@ -1,12 +1,13 @@
 # DungeonCrawl
 
-**TODO: Add description**
+An exciting terminal game, survive a dungeon full of monsters and traps, earn treasure, exit safely!
 
 ## Installation
+Assuming you have Elixir (1.9.2) installed. If not see the parent `README.md` for instructions.
+`git clone` the parent repository, `cd` into `dungeon_crawl` and in your terminal enter `iex -S mix start`
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `dungeon_crawl` to your list of dependencies in `mix.exs`:
 
+## Dependencies
 ```elixir
 def deps do
   [
@@ -14,8 +15,3 @@ def deps do
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/dungeon_crawl](https://hexdocs.pm/dungeon_crawl).
-
