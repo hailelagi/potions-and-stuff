@@ -1,4 +1,9 @@
 defmodule DungeonCrawl.Heroes do
+  @moduledoc """
+  Heroes with attributes based on character data model
+  character defines the application data domain and a
+  hero can be thought of as an "instance" of it
+  """
   alias DungeonCrawl.Character, as: Character
 
   def all,

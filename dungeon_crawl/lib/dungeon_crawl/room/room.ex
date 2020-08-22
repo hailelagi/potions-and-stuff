@@ -1,8 +1,12 @@
 defmodule DungeonCrawl.Room do
+  @moduledoc """
+  data structure representing a "room"
+  a room has "actions" borrowed
+  """
   alias DungeonCrawl.Room, as: Room
   import DungeonCrawl.Room.Action
 
-  def struct(description, actions: [])
+  defstruct description: nil, actions: []
 
   def all,
     do: [
