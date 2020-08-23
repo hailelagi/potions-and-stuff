@@ -1,5 +1,5 @@
-# CREATING CONTRACTS and BEHAVIOURS
-# pg 163
+# CREATING BEHAVIOURS
 defmodule DungeonCrawl.Room.Trigger do
+  # function rule
   @callback run(character :: any, action :: any) :: any
 end
