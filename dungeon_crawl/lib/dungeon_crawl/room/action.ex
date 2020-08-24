@@ -4,6 +4,8 @@ defmodule DungeonCrawl.Room.Action do
   """
   alias DungeonCrawl.Room.Action, as: Action
   defstruct id: nil, label: nil
+  # static type checking
+  @type t :: %Action{id: atom, label: String.t()}
 
   def forward, do: %Action{id: :forward, label: "Move forward."}
   def rest, do: %Action{id: :rest, label: "Take a better look and rest."}

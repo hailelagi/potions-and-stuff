@@ -33,7 +33,7 @@ defmodule DungeonCrawl.CLI.Main do
     # pick a random room
     rooms
     |> Enum.random()
-    |> DungeonCrawl.CLI.RoomActionsChoice.start
+    |> DungeonCrawl.CLI.RoomActionsChoice.start()
     |> trigger_action(character)
     |> handle_action_result
   end
