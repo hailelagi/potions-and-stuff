@@ -15,6 +15,11 @@ defmodule DungeonCrawl.Room do
         description: "You can see a small light from a crack in the walls",
         actions: [forward()],
         trigger: Triggers.Exit
-      }
+      },
+    %Room{
+        description: "Something moves around in the dark, what do you do?",
+        actions: [forward()],
+        trigger: Triggers.Enemy
+      },
     ]
 end

@@ -22,7 +22,17 @@ defmodule DungeonCrawl.CLI.Main do
   end
 
   defp hero_choice do
-    DungeonCrawl.CLI.HeroChoice.start()
+    hero = DungeonCrawl.CLI.HeroChoice.start()
+    %{hero | name: "You"}
+  end
+
+  defp crawl(%{hit_points: 0}, _) do
+    Shell.prompt("")
+    Shell.cmd("cls")
+    Shell.info("You have been gravely injured, it hurts")
+    Shell.info("As yu walk slowly your vision blurs and you fall")
+    Shell.info("The potion master wins! You rest of this nightmare!")
+    Shell.prompt("")
   end
 
   defp crawl(character, rooms) do
@@ -30,6 +40,8 @@ defmodule DungeonCrawl.CLI.Main do
     Shell.prompt("Press Enter to continue")
     Shell.cmd("cls")
 
+    # pprint current status
+    Shell.info(Dungeon.Crawl.Character.current_stats(character))
     # pick a random room
     rooms
     |> Enum.random()

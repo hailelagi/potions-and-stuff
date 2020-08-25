@@ -1,5 +1,10 @@
 # CREATING BEHAVIOURS
 defmodule DungeonCrawl.Room.Trigger do
-  # function rule
+  alias DungeonCrawl.Character, as: Character
+  alias DungeonCrawl.Room.Action, as: Action
+
+  # function(rule) signature with type spec
+  # callback references custom type "t"
+  # implemented as a behaviour in exit
   @callback run(Character.t(), Action.t()) :: {Character.t(), atom}
 end
