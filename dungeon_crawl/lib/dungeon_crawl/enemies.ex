@@ -1,4 +1,7 @@
 defmodule DungeonCrawl.Enemies do
+  @moduledoc """
+  Enemies with attributes based on character data model
+  """
   alias DungeonCrawl.Character
 
   def all,

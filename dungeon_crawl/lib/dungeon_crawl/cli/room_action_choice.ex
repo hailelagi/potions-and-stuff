@@ -4,7 +4,7 @@ defmodule DungeonCrawl.CLI.RoomActionsChoice do
   from base_commands returns the room and the action chosen
   """
   alias Mix.Shell.IO, as: Shell
-  import Dungeon.Crawl.CLI.BaseCommands
+  import DungeonCrawl.CLI.BaseCommands
 
   def start(room) do
     # A single random room map

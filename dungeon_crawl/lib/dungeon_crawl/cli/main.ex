@@ -8,17 +8,18 @@ defmodule DungeonCrawl.CLI.Main do
   def start_game do
     welcome_message()
     Shell.prompt("Press Enter to continue")
-    hero_choice()
+
     # create a room and venture into it
     crawl(hero_choice(), DungeonCrawl.Room.all())
   end
 
   defp welcome_message do
     Shell.info("<<-==Dungeon Crawl v0.0.1 by @obsessedyouth -===>>")
+    Shell.info("-----------PLOT-----------")
     Shell.info("You awake in a dungeon full of monsters.")
     Shell.info("The dastardly evil king potion master is to blame")
     Shell.info("Some call him a programmer, a purveyor of arcane magic")
-    Shell.info("You need to survive and find the exit.")
+    Shell.info("You need to survive his creations and find the exit.")
   end
 
   defp hero_choice do
@@ -29,8 +30,8 @@ defmodule DungeonCrawl.CLI.Main do
   defp crawl(%{hit_points: 0}, _) do
     Shell.prompt("")
     Shell.cmd("cls")
-    Shell.info("You have been gravely injured, it hurts")
-    Shell.info("As yu walk slowly your vision blurs and you fall")
+    Shell.info("You have been gravely injured, it hurts..")
+    Shell.info("As you walk slowly your vision blurs and you fall.")
     Shell.info("The potion master wins! You rest of this nightmare!")
     Shell.prompt("")
   end
@@ -41,13 +42,20 @@ defmodule DungeonCrawl.CLI.Main do
     Shell.cmd("cls")
 
     # pprint current status
-    Shell.info(Dungeon.Crawl.Character.current_stats(character))
+    Shell.info(DungeonCrawl.Character.current_stats(character))
     # pick a random room
     rooms
-    |> Enum.random()
+    |> Enum.find(fn room -> room.name == bias_probability(rooms) end)
     |> DungeonCrawl.CLI.RoomActionsChoice.start()
     |> trigger_action(character)
     |> handle_action_result
+  end
+
+  defp bias_probability(rooms) do
+    rooms
+    |> Enum.map(fn room -> room.probability end)
+    |> Enum.reduce(fn room, acc -> room ++ acc end)
+    |> Enum.random()
   end
 
   defp trigger_action({room, action}, character) do

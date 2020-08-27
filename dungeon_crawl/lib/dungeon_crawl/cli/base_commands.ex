@@ -1,4 +1,4 @@
-defmodule Dungeon.Crawl.CLI.BaseCommands do
+defmodule DungeonCrawl.CLI.BaseCommands do
   @moduledoc """
   Reusable custom helper function module, abstracted
   repetitive functionality from rooms and hero_choice

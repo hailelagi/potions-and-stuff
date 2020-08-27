@@ -6,7 +6,7 @@ defmodule DungeonCrawl.CLI.HeroChoice do
   choice borrows helpers from base to process input
   """
   alias Mix.Shell.IO, as: Shell
-  import Dungeon.Crawl.CLI.BaseCommands
+  import DungeonCrawl.CLI.BaseCommands
 
   def start do
     # linux and macOS ==> "clear"

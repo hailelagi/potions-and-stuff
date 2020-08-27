@@ -29,7 +29,7 @@ defmodule DungeonCrawl.Character do
     %{character | hit_points: new_hit_points}
   end
 
-  def heal(character, healing(value)) do
+  def heal(character, healing_value) do
     new_hit_points =
       min(
         character.hit_points + healing_value,
@@ -40,5 +40,5 @@ defmodule DungeonCrawl.Character do
   end
 
   def current_stats(character),
-    do: "Player stats \n HP: #{character.hit_points}/ #{character.max_hit_points}"
+    do: "Player stats \n HP: #{character.hit_points} / #{character.max_hit_points}"
 end

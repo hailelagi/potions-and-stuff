@@ -1,10 +1,11 @@
 defmodule DungeonCrawl.Room.Triggers.Enemy do
-  @behaviour DungeonCrawl.Room.Trigger
-
   alias Mix.Shell.IO, as: Shell
 
+  @behaviour DungeonCrawl.Room.Trigger
+  @impl DungeonCrawl.Room.Trigger
+
   def run(character, %DungeonCrawl.Room.Action{id: :forward}) do
-    enemy = Enum.random(Dungeon.Crawl.Enemies.all)
+    enemy = Enum.random(DungeonCrawl.Enemies.all)
 
     Shell.info(enemy.description)
     Shell.info("The enemy #{enemy.name} looks at you suspiciously")
