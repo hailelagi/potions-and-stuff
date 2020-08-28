@@ -7,7 +7,7 @@ defmodule DungeonCrawl.Room do
   alias DungeonCrawl.Room.Triggers, as: Triggers
   import DungeonCrawl.Room.Action
 
-  defstruct name: nil, description: nil, actions: [], trigger: nil, probability: 0
+  defstruct name: nil, description: nil, actions: [], trigger: nil, probability: nil
 
   def all,
     do: [
