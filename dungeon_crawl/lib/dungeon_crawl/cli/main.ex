@@ -15,9 +15,9 @@ defmodule DungeonCrawl.CLI.Main do
 
   defp welcome_message do
     Shell.info("<<-==Dungeon Crawl v0.0.1 by @obsessedyouth -===>>")
-    Shell.info("-----------PLOT-----------")
+    Shell.info("--------------------PLOT--------------------------")
     Shell.info("You awake in a dungeon full of monsters.")
-    Shell.info("The dastardly evil king potion master is to blame")
+    Shell.info("The dastardly evil king \"potion master\" is to blame")
     Shell.info("Some call him a programmer, a purveyor of arcane magic")
     Shell.info("You need to survive his creations and find the exit.")
   end
@@ -25,6 +25,13 @@ defmodule DungeonCrawl.CLI.Main do
   defp hero_choice do
     hero = DungeonCrawl.CLI.HeroChoice.start()
     %{hero | name: "You"}
+  end
+
+  defp difficulty do
+    # Add an extra option at the beginning of the game
+    # to allow players to choose the difficulty level.
+    # For example, when the player wants the game to be hard,
+    # the exit and healing rooms will be difficult to find."""
   end
 
   defp crawl(%{hit_points: 0}, _) do
@@ -44,18 +51,16 @@ defmodule DungeonCrawl.CLI.Main do
     # pprint current status
     Shell.info(DungeonCrawl.Character.current_stats(character))
     # pick a random room
-    rooms
-    |> Enum.find(fn room -> room.name == bias_probability(rooms) end)
+    pick = rooms
+    |> Enum.map(fn room -> room.probability end)
+    |> DungeonCrawl.CLI.Probability.bias_probability()
+
+    {:ok, biased_room} = Enum.fetch(rooms, pick)
+
+    biased_room
     |> DungeonCrawl.CLI.RoomActionsChoice.start()
     |> trigger_action(character)
     |> handle_action_result
-  end
-
-  defp bias_probability(rooms) do
-    rooms
-    |> Enum.map(fn room -> room.probability end)
-    |> Enum.reduce(fn room, acc -> room ++ acc end)
-    |> Enum.random()
   end
 
   defp trigger_action({room, action}, character) do

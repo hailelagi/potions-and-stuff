@@ -16,21 +16,21 @@ defmodule DungeonCrawl.Room do
         description: "You can see a small light from a crack in the walls",
         actions: [forward()],
         trigger: Triggers.Exit,
-        probability: [:exit]
+        probability: 0.2
       },
-    %Room{
+      %Room{
         name: :goblin,
         description: "You can see an enemy blocking your path",
         actions: [forward()],
         trigger: Triggers.Enemy,
-        probability: [:goblin, :goblin, :goblin, :goblin, :goblin]
+        probability: 0.3
       },
-    %Room{
+      %Room{
         name: :ogre,
         description: "Something moves around in the dark, what do you do?",
         actions: [forward()],
         trigger: Triggers.Enemy,
-        probability: [:ogre, :ogre, :ogre]
-      },
+        probability: 0.5
+      }
     ]
 end
