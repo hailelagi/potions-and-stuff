@@ -9,6 +9,8 @@ defmodule DungeonCrawl.CLI.Main do
     welcome_message()
     Shell.prompt("Press Enter to continue")
 
+    # difficulty
+    difficulty()
     # create a room and venture into it
     crawl(hero_choice(), DungeonCrawl.Room.all())
   end
@@ -27,11 +29,14 @@ defmodule DungeonCrawl.CLI.Main do
     %{hero | name: "You"}
   end
 
-  defp difficulty do
-    # Add an extra option at the beginning of the game
+  defp select_difficulty do
+    # TODO: Add an extra option at the beginning of the game
     # to allow players to choose the difficulty level.
-    # For example, when the player wants the game to be hard,
-    # the exit and healing rooms will be difficult to find."""
+
+    # update the room map probability
+    #easy = [0.3, 0.4, 0.3]
+    #medium = [0.2, 0.3, 0.5]
+    #hard = [0.01, 0.4, 0.59]
   end
 
   defp crawl(%{hit_points: 0}, _) do
