@@ -6,7 +6,7 @@ An exciting terminal game, survive a dungeon full of monsters and traps, earn tr
 Assuming you have Elixir (1.9.2) installed. If not see the parent `README.md` for instructions.
 `git clone` the parent repository, `cd` into `dungeon_crawl` and in your terminal enter `iex -S mix start`
 
-#TODO
+## TODO: Features
 
 - Implement difficulty level selection
 
