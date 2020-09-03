@@ -21,11 +21,7 @@ defmodule DungeonCrawl.CLI.HeroChoice do
 
     # see base_commands for helpers
     heroes
-    |> display_options
-    |> generate_question
-    |> Shell.prompt()
-    |> parse_answer
-    |> find_hero_by_index.()
+    |> ask_for_option
     |> confirm_hero
   end
 

@@ -3,6 +3,7 @@ defmodule DungeonCrawl.CLI.BaseCommands do
   Reusable custom helper function module, abstracted
   repetitive functionality from rooms and hero_choice
   """
+  @invalid_option {:error, "Invalid option"}
   alias Mix.Shell.IO, as: Shell
 
   def display_options(options) do
@@ -25,7 +26,36 @@ defmodule DungeonCrawl.CLI.BaseCommands do
   def parse_answer(answer) do
     # take input from Shell.prompt// IO.get
     # parse it, and return the index value
-    {option, _} = Integer.parse(answer)
-    option - 1
+    case Integer.parse(answer) do
+      :error ->
+        throw @invalid_option
+      {option, _} -> option - 1
+    end
+  end
+
+  def find_option_by_index(index, options) do
+    Enum.at(options, index) || throw @invalid_option
+  end
+
+  def ask_for_option(options) do
+    try do
+      options
+      |> display_options
+      |> generate_question
+      |> Shell.prompt
+      |> parse_answer
+      |> find_option_by_index(options)
+      catch
+      {:error, message} ->
+        display_error(message)
+        ask_for_option(options)
+    end
+  end
+
+  def display_error(message) do
+    Shell.cmd("cls")
+    Shell.error(message)
+    Shell.prompt("Please Enter to continue")
+    Shell.cmd("cls")
   end
 end
