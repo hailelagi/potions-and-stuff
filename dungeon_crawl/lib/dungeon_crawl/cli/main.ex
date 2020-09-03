@@ -9,8 +9,7 @@ defmodule DungeonCrawl.CLI.Main do
     welcome_message()
     Shell.prompt("Press Enter to continue")
 
-    # difficulty
-    difficulty()
+    #difficulty()
     # create a room and venture into it
     crawl(hero_choice(), DungeonCrawl.Room.all())
   end

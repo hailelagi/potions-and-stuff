@@ -14,18 +14,8 @@ defmodule DungeonCrawl.CLI.HeroChoice do
     Shell.info("Start by choosing your hero: ")
 
     # list of hero maps
-    heroes = DungeonCrawl.Heroes.all()
-    # partial application expecting incoming index
-    find_hero_by_index = &Enum.at(heroes, &1)
-    # returns a "hero" map
-
-    # see base_commands for helpers
-    heroes
-    |> display_options
-    |> generate_question
-    |> Shell.prompt()
-    |> parse_answer
-    |> find_hero_by_index.()
+    DungeonCrawl.Heroes.all()
+    |> ask_for_option
     |> confirm_hero
   end
 
