@@ -22,10 +22,40 @@ defmodule DungeonCrawl.CLI.BaseCommands do
     "Which one? [#{options}]\n"
   end
 
-  def parse_answer(answer) do
+  def parse_answer!(answer) do
     # take input from Shell.prompt// IO.get
     # parse it, and return the index value
-    {option, _} = Integer.parse(answer)
-    option - 1
+    case Integer.parse(answer) do
+      :error ->
+        raise DungeonCrawl.CLI.InvalidOptionError
+      {option, _} -> option - 1
+    end
+  end
+
+  def find_option_by_index!(index, options) do
+    Enum.at(options, index)
+    || raise DungeonCrawl.CLI.InvalidOptionError
+  end
+
+  def ask_for_option(options) do
+    try do
+      options
+      |> display_options
+      |> generate_question
+      |> Shell.prompt
+      |> parse_answer!
+      |> find_option_by_index!(options)
+      rescue
+      err in DungeonCrawl.CLI.InvalidOptionError ->
+        display_error(err)
+        ask_for_option(options)
+    end
+  end
+
+  def display_error(err) do
+    Shell.cmd("cls")
+    Shell.error(err.message)
+    Shell.prompt("Press Enter to continue")
+    Shell.cmd("cls")
   end
 end
