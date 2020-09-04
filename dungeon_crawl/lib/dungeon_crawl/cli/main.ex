@@ -9,8 +9,7 @@ defmodule DungeonCrawl.CLI.Main do
     welcome_message()
     Shell.prompt("Press Enter to continue")
 
-    # difficulty
-    difficulty()
+    #difficulty()
     # create a room and venture into it
     crawl(hero_choice(), DungeonCrawl.Room.all())
   end
@@ -34,9 +33,9 @@ defmodule DungeonCrawl.CLI.Main do
     # to allow players to choose the difficulty level.
 
     # update the room map probability
-    #easy = [0.3, 0.4, 0.3]
-    #medium = [0.2, 0.3, 0.5]
-    #hard = [0.01, 0.4, 0.59]
+    # easy = [0.3, 0.4, 0.3]
+    # medium = [0.2, 0.3, 0.5]
+    # hard = [0.01, 0.4, 0.59]
   end
 
   defp crawl(%{hit_points: 0}, _) do
@@ -56,9 +55,10 @@ defmodule DungeonCrawl.CLI.Main do
     # pprint current status
     Shell.info(DungeonCrawl.Character.current_stats(character))
     # pick a random room
-    pick = rooms
-    |> Enum.map(fn room -> room.probability end)
-    |> DungeonCrawl.CLI.Probability.bias_probability()
+    pick =
+      rooms
+      |> Enum.map(fn room -> room.probability end)
+      |> DungeonCrawl.CLI.Probability.bias_probability()
 
     {:ok, biased_room} = Enum.fetch(rooms, pick)
 
