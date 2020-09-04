@@ -9,18 +9,9 @@ defmodule DungeonCrawl.CLI.RoomActionsChoice do
   def start(room) do
     # A single random room map
     # list of action functions
-    room_actions = room.actions
-    find_action_by_index = &Enum.at(room_actions, &1)
-
     Shell.info(room.description())
 
-    chosen_action =
-      room_actions
-      |> display_options
-      |> generate_question
-      |> Shell.prompt()
-      |> parse_answer
-      |> find_action_by_index.()
+    chosen_action = ask_for_option(room.actions)
 
     {room, chosen_action}
   end

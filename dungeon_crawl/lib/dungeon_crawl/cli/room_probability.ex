@@ -2,12 +2,13 @@ defmodule DungeonCrawl.CLI.Probability do
   def bias_probability(weights) do
     # Initialization
     # does the probability exist in memory?
-    current_probability = try do
-      [weights: cached_probs] = :ets.lookup(:weight_probability, :weights)
-      cached_probs
-    rescue
-      ArgumentError -> cache(weights)
-    end
+    current_probability =
+      try do
+        [weights: cached_probs] = :ets.lookup(:weight_probability, :weights)
+        cached_probs
+      rescue
+        ArgumentError -> cache(weights)
+      end
 
     current_probability
     |> weighted_random
@@ -27,6 +28,7 @@ defmodule DungeonCrawl.CLI.Probability do
 
     # create work lists
     scaled_weight = scale_probability(weights, n)
+
     small =
       scaled_weight
       |> Enum.filter(fn {_, w} -> w < 1 end)
@@ -72,7 +74,7 @@ defmodule DungeonCrawl.CLI.Probability do
     # Remove the first element from small call it l
     # Remove the first element from large call it g
     # Pg := (pg + pl) - 1 (numerical stability :) )
-    new_weight_g = (weight_g + weight_l) - 1
+    new_weight_g = weight_g + weight_l - 1
 
     # if Pg < 1 add g to small
     if new_weight_g < 1 do
@@ -99,27 +101,29 @@ defmodule DungeonCrawl.CLI.Probability do
     # Generate a fair random distro in a range
     # from n and call it i.
     n = Enum.count(aliased_table)
-    r = Enum.random(0..1000)/1000 * n
+    r = Enum.random(0..1000) / 1000 * n
     # random choice P(1/3)
-    i = floor(r) # 0, 1 , 2
+    # 0, 1 , 2
+    i = floor(r)
 
     prob = aliased_table
 
     {:ok, odd} = Enum.fetch(prob, i)
 
     # partial fit
-    if (r - i) > (odd) do
+    if r - i > odd do
       # which piece of what goes where
-      bias = prob
-      |> Enum.with_index()
-      |> Stream.filter(fn {p, _} -> p == 1 end)
-      |> Enum.random()
+      bias =
+        prob
+        |> Enum.with_index()
+        |> Stream.filter(fn {p, _} -> p == 1 end)
+        |> Enum.random()
 
       {_, i} = bias
 
       i
     else
-       i
+      i
     end
   end
 
