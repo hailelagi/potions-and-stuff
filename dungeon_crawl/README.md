@@ -4,7 +4,7 @@ An exciting terminal game, survive a dungeon full of monsters and traps, earn tr
 
 ## Installation
 Assuming you have Elixir (1.9.2) installed. If not see the parent `README.md` for instructions.
-`git clone` the parent repository, `cd` into `dungeon_crawl` and in your terminal enter `iex -S mix start`.
+`git clone` the parent repository, `cd` into `dungeon_crawl` and in your terminal enter `mix do deps.get, deps.compile` to install dependencies and then `iex -S mix start` to play in interactive scripting mode.
 
 ## Experimental branches? What's up with that?
 
