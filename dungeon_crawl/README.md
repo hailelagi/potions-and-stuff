@@ -1,21 +1,36 @@
 # DungeonCrawl
 
-**TODO: Add description**
+An exciting terminal game, survive a dungeon full of monsters and traps, earn treasure, exit safely!
 
 ## Installation
+Assuming you have Elixir (1.9.2) installed. If not see the parent `README.md` for instructions.
+`git clone` the parent repository, `cd` into `dungeon_crawl` and in your terminal enter `mix do deps.get, deps.compile` to install dependencies and then `iex -S mix start` to play in interactive scripting mode.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `dungeon_crawl` to your list of dependencies in `mix.exs`:
+## Experimental branches? What's up with that?
 
+The various branches existed as ways to test out various implementations of error handling strategies in elixir.
+¯\_(ツ)_/¯ should I delete them? idk probably, but they aren't hurting anyone, so I'll keep 'em here for reference.
+
+## TODO: Features
+
+- Implement difficulty level selection
+
+- Dynamic room probability updates depending on user interaction
+
+- Scoring System
+
+- Item storage
+
+- Extra options in the battle module - "run away"
+
+- Expand Rooms and characters
+
+## Dependencies
 ```elixir
-def deps do
-  [
-    {:dungeon_crawl, "~> 0.1.0"}
-  ]
-end
+  defp deps do
+    [
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:monadex, "~>1.1"}
+    ]
+  end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/dungeon_crawl](https://hexdocs.pm/dungeon_crawl).
-
